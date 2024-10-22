@@ -1,0 +1,23 @@
+*.unity filter=lfs diff=lfs merge=lfs -text
+*.mp4 filter=lfs diff=lfs merge=lfs -text
+*.dylib filter=lfs diff=lfs merge=lfs -text
+
+# Set default behavior for all text files
+* text=auto
+
+# Unity specific files
+*.cs text diff=csharp
+*.shader text
+*.cginc text
+*.meta text
+
+# Binary files (these should never be converted to LF/CRLF)
+*.png binary
+*.jpg binary
+*.psd binary
+*.fbx binary
+*.mp3 binary
+*.ogg binary
+*.wav binary
+*.ttf binary
+*.dll binary

@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "JDProject.sln"
+    "dotnet.defaultSolution": "JDProjectReal.sln"
 }

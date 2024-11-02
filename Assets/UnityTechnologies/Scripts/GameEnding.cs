@@ -15,10 +15,10 @@ public class GameEnding : MonoBehaviour
     component of the caughtBackgroundImage GameObject.*/
     public AudioSource caughtAudio;
 
-    /*public GameObject m_ClueBed;
-    public GameObject m_ClueTable;
-    public GameObject m_ClueBath;
-    public GameObject m_Key;*/
+    public GameObject m_ClueOne;
+    public GameObject m_ClueTwo;
+    public GameObject m_ClueThree;
+    public GameObject m_Key;
     
     bool m_KeyFound;
 
@@ -31,24 +31,25 @@ public class GameEnding : MonoBehaviour
     bool m_HasAudioPlayed;
     void OnTriggerEnter(Collider other){ 
         if(other.gameObject == player){
-            /*if (other.gameObject == m_ClueBed) {
-                m_ClueBedFound = true;
-                m_ClueBed.SetActive(false);
-                m_ClueTable.SetActive(true);
-            } else if (other.gameObject == m_ClueTable && m_ClueBedFound) {
+            if (other.gameObject == m_ClueOne) {
+                m_ClueBedFound = true; 
+                Debug.Log("Clue Found" + m_ClueBedFound);
+                m_ClueOne.SetActive(false);
+                m_ClueTwo.SetActive(true);
+            } else if (other.gameObject == m_ClueTwo && m_ClueBedFound) {
                 m_ClueTableFound = true;
-                m_ClueTable.SetActive(false);
-                m_ClueBath.SetActive(true);
-            } else if (other.gameObject == m_ClueBath && m_ClueTableFound) {
+                m_ClueTwo.SetActive(false);
+                m_ClueThree.SetActive(true);
+            } else if (other.gameObject == m_ClueThree && m_ClueTableFound) {
                 m_ClueBathFound = true;
-                m_ClueBath.SetActive(false);
+                m_ClueThree.SetActive(false);
                 m_Key.SetActive(true);
             } else if (other.gameObject == m_Key && m_ClueBathFound) {
                 m_KeyFound = true;
                 m_Key.SetActive(false);
-            } else if (other.gameObject == player && m_KeyFound) {*/
+            } else if (other.gameObject == player && m_KeyFound) {
                 m_IsPlayerAtExit = true;
-            //}
+            }
         }  
     }
 

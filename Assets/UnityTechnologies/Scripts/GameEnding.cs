@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -14,45 +15,90 @@ public class GameEnding : MonoBehaviour
     public CanvasGroup caughtBackgroundImageCanvasGroup; /*This will store a reference to the CanvasGroup
     component of the caughtBackgroundImage GameObject.*/
     public AudioSource caughtAudio;
-
-    public GameObject m_ClueOne;
-    public GameObject m_ClueTwo;
-    public GameObject m_ClueThree;
-    public GameObject m_Key;
     
-    bool m_KeyFound;
+    public LetterManagerDoor letterManager;
+    public LetterManagerBed letterManager2;
+    public LetterManagerBath letterManager3;
+    public LetterManagerKey letterManager4; 
 
-    bool m_ClueBedFound;
-    bool m_ClueTableFound;
-    bool m_ClueBathFound;
+    bool m_ClueBathFound = false;
+    bool m_ClueBedFound = false;
+    bool m_ClueDoorFound = false;
+    bool m_ClueKeyFound = false;
+    bool m_KeyFound;
     bool m_IsPlayerAtExit;
     bool m_IsPlayerCaught;
     float m_Timer;
     bool m_HasAudioPlayed;
-    void OnTriggerEnter(Collider other){ 
-        if(other.gameObject == player){
-            if (other.gameObject == m_ClueOne) {
-                m_ClueBedFound = true; 
-                Debug.Log("Clue Found" + m_ClueBedFound);
-                m_ClueOne.SetActive(false);
-                m_ClueTwo.SetActive(true);
-            } else if (other.gameObject == m_ClueTwo && m_ClueBedFound) {
-                m_ClueTableFound = true;
-                m_ClueTwo.SetActive(false);
-                m_ClueThree.SetActive(true);
-            } else if (other.gameObject == m_ClueThree && m_ClueTableFound) {
-                m_ClueBathFound = true;
-                m_ClueThree.SetActive(false);
-                m_Key.SetActive(true);
-            } else if (other.gameObject == m_Key && m_ClueBathFound) {
-                m_KeyFound = true;
-                m_Key.SetActive(false);
-            } else if (other.gameObject == player && m_KeyFound) {
-                m_IsPlayerAtExit = true;
+
+    void Start()
+    {
+        // Ensure the LetterManager is assigned in the inspector or find it dynamically
+        if (letterManager == null)
+        {
+            letterManager = FindObjectOfType<LetterManagerDoor>();
+            if (letterManager == null)
+            {
+                Debug.LogError("LetterManager not found!");
             }
-        }  
+        }
+        if (letterManager2 == null)
+        {
+            letterManager2 = FindObjectOfType<LetterManagerBed>();
+            if (letterManager2 == null)
+            {
+                Debug.LogError("LetterManager not found!");
+            }
+        }
+        if (letterManager3 == null)
+        {
+            letterManager3 = FindObjectOfType<LetterManagerBath>();
+            if (letterManager3 == null)
+            {
+                Debug.LogError("LetterManager not found!");
+            }
+        }
+        if (letterManager4 == null)
+        {
+            letterManager4 = FindObjectOfType<LetterManagerKey>();
+            if (letterManager4 == null)
+            {
+                Debug.LogError("LetterManager not found!");
+            }
+        }
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        if(other.gameObject == player){
+            if (letterManager.IsClueDoorFound())
+            {
+                m_ClueDoorFound = true;
+            }
+            if (letterManager2.IsClueBedFound())
+            {
+                m_ClueBedFound = true;
+            }
+            if (letterManager3.IsClueBathFound())
+            {
+                m_ClueBathFound = true;
+            }
+            if (letterManager4.IsClueKeyFound())
+            {
+                m_ClueKeyFound = true;
+            }
+            CheckKeyFound(m_ClueKeyFound);
+        }
+    }
+
+void CheckKeyFound(bool keyFound)
+{
+    if (keyFound)
+    {
+        m_IsPlayerAtExit = true;
+        Debug.Log("Player can exit");
+    }
+}
     public void CaughtPlayer ()
         {
             m_IsPlayerCaught = true;

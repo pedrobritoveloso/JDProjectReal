@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LetterManagerDoor : MonoBehaviour
 {
     public GameObject m_ClueOne;
+
+    public Button toActivate;
 
     public LetterManagerBed m_LetterManagerBed;
 
@@ -12,6 +15,9 @@ public class LetterManagerDoor : MonoBehaviour
 
     void Start()
     {
+        if( toActivate != null){
+            toActivate.gameObject.SetActive(false);
+        }
         m_ClueOne.SetActive(true);
         if (m_LetterManagerBed == null)
         {
@@ -31,7 +37,16 @@ public class LetterManagerDoor : MonoBehaviour
             Debug.Log("Clue One found");
             m_ClueDoorFound = true;
             m_ClueOne.SetActive(false);
+            toActivate.gameObject.SetActive(true);
+            Debug.Log("Button activated");
             m_LetterManagerBed.Active();
+        }
+    }
+
+    private void OnTriggerExit(Collider other){
+        if(other.gameObject.tag == "Player"){
+            Debug.Log("Player left the trigger");
+            toActivate.gameObject.SetActive(false);
         }
     }
 

@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class LetterManagerBath : MonoBehaviour
 {
     public GameObject m_ClueThree;
+
+    public Button toActivate;
 
     public LetterManagerBed m_LetterManagerBed;
     public LetterManagerKey m_LetterManagerKey; 
@@ -13,6 +16,9 @@ public class LetterManagerBath : MonoBehaviour
 
     void Start()
     {
+        if( toActivate != null){
+            toActivate.gameObject.SetActive(false);
+        }
         m_ClueThree.SetActive(false);
         if (m_LetterManagerKey == null)
         {
@@ -46,7 +52,16 @@ public class LetterManagerBath : MonoBehaviour
             Debug.Log("Clue Three found");
             m_ClueBathFound = true;
             m_ClueThree.SetActive(false);
+            toActivate.gameObject.SetActive(true);
+            Debug.Log("Button activated");
             m_LetterManagerKey.Active();
+        }
+    }
+
+    private void OnTriggerExit(Collider other){
+        if(other.gameObject.tag == "Player"){
+            Debug.Log("Player left the trigger");
+            toActivate.gameObject.SetActive(false);
         }
     }
 

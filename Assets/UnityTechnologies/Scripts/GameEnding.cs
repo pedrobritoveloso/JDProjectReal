@@ -119,11 +119,11 @@ void CheckKeyFound(bool keyFound)
             imageCanvasGroup.alpha = m_Timer / fadeDuration;
             if(m_Timer > fadeDuration + displayImageDuration){
                 if(doRestart){
-                    SceneManager.LoadScene (0);
+                    SceneManager.LoadScene("MainScene");
                 }
                 else
                 {
-                    Application.Quit ();
+                    SceneManager.LoadScene("MainMenu");
                 }
             }
         }

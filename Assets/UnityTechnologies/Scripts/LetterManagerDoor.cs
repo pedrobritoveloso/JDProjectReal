@@ -3,26 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
 public class LetterManagerDoor : MonoBehaviour
 {
     public GameObject m_ClueOne;
-
     public Button toActivate;
-
     public LetterManagerBed m_LetterManagerBed;
-
     public GameObject Letter1;
+    public GameObject LetterSound; // Reference to the LetterSound object with the AudioSource
 
-    private bool m_ClueDoorFound = false; //porta
+    private bool m_ClueDoorFound = false;
 
     void Start()
     {
         Letter1.SetActive(false);
-        if( toActivate != null){
+        if (toActivate != null)
+        {
             toActivate.gameObject.SetActive(false);
         }
         m_ClueOne.SetActive(true);
+        
         if (m_LetterManagerBed == null)
         {
             m_LetterManagerBed = FindObjectOfType<LetterManagerBed>();
@@ -44,11 +43,24 @@ public class LetterManagerDoor : MonoBehaviour
             Letter1.SetActive(true);
             Debug.Log("Button activated");
             m_LetterManagerBed.Active();
+
+            // Play the sound from the LetterSound object if it has an AudioSource
+            AudioSource audioSource = LetterSound.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("No AudioSource found on LetterSound object.");
+            }
         }
     }
 
-    private void OnTriggerExit(Collider other){
-        if(other.gameObject.tag == "Player"){
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
             Debug.Log("Player left the trigger");
             m_ClueOne.SetActive(false);
             Letter1.SetActive(false);

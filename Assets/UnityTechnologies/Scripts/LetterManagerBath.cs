@@ -12,6 +12,7 @@ public class LetterManagerBath : MonoBehaviour
     public LetterManagerBed m_LetterManagerBed;
     public LetterManagerKey m_LetterManagerKey; 
     public GameObject Letter3;
+    public GameObject LetterSound;
 
     private bool m_ClueBathFound = false; //porta
 
@@ -65,6 +66,16 @@ public class LetterManagerBath : MonoBehaviour
             Debug.Log("Player left the trigger");
             Letter3.SetActive(false);
             m_ClueThree.SetActive(false);
+
+            AudioSource audioSource = LetterSound.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("No AudioSource found on LetterSound object.");
+            }
         }
     }
 

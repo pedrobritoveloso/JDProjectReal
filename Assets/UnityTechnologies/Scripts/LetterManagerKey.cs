@@ -13,6 +13,7 @@ public class LetterManagerKey : MonoBehaviour
     public LetterManagerBath m_LetterManagerBath;
 
     public GameObject Letter4;
+    public GameObject LetterSound;
 
     private bool m_ClueKeyFound = false; //porta
 
@@ -59,6 +60,16 @@ public class LetterManagerKey : MonoBehaviour
             m_ClueKeyFound = true;
             toActivate.gameObject.SetActive(true);
             Debug.Log("Button activated");
+
+            AudioSource audioSource = LetterSound.GetComponent<AudioSource>();
+            if (audioSource != null)
+            {
+                audioSource.Play();
+            }
+            else
+            {
+                Debug.LogWarning("No AudioSource found on LetterSound object.");
+            }
         }
     }
 

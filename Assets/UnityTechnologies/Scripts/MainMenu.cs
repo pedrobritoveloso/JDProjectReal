@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 public class MainMenu : MonoBehaviour
 {
     // Drag and drop your audio clip in the Inspector
-    public AudioSource playSoundEffect;  // Attach an AudioSource with the desired sound
 
     public void PlayGame()
     {
@@ -13,19 +12,30 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(PlayGameWithDelay());
     }
 
+    public void PlayGameSkipTutorial()
+    {
+        // Start the Coroutine to delay the scene load
+        StartCoroutine(PlayGameWithDelayTwo());
+    }
+
     private IEnumerator PlayGameWithDelay()
     {
-        // Play the sound effect
-        if (playSoundEffect != null)
-        {
-            playSoundEffect.Play();
-        }
-
+      
         // Wait for 3 seconds
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(1f);
 
         // Load the next scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+    }
+
+      private IEnumerator PlayGameWithDelayTwo()
+    {
+      
+        // Wait for 3 seconds
+        yield return new WaitForSeconds(1f);
+
+        // Load the next scene
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 2);
     }
 
     public void QuitGame()

@@ -37,7 +37,6 @@ public class LetterManagerDoor : MonoBehaviour
         {
             Debug.Log("Clue One found");
             m_ClueDoorFound = true;
-            m_ClueOne.SetActive(false);
             toActivate.gameObject.SetActive(true);
             Debug.Log("Button activated");
             m_LetterManagerBed.Active();
@@ -47,7 +46,7 @@ public class LetterManagerDoor : MonoBehaviour
     private void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "Player"){
             Debug.Log("Player left the trigger");
-            toActivate.gameObject.SetActive(false);
+            m_ClueOne.SetActive(false);
         }
     }
 

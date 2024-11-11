@@ -52,7 +52,6 @@ public class LetterManagerBed : MonoBehaviour
         {
             Debug.Log("Clue Two found");
             m_ClueBedFound = true;
-            m_ClueTwo.SetActive(false);
             toActivate.gameObject.SetActive(true);
             Debug.Log("Button activated");
             m_LetterManagerBath.Active();
@@ -61,7 +60,7 @@ public class LetterManagerBed : MonoBehaviour
     private void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "Player"){
             Debug.Log("Player left the trigger");
-            toActivate.gameObject.SetActive(false);
+            m_ClueTwo.SetActive(false);
         }
     }
 

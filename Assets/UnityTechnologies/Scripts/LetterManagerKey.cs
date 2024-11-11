@@ -7,13 +7,14 @@ public class LetterManagerKey : MonoBehaviour
 {
     public GameObject m_ClueKey;
 
+    public GameObject LetterKey;
+
     public Button toActivate;
     public LetterManagerBath m_LetterManagerBath;
 
     private bool m_ClueKeyFound = false; //porta
 
-    void Start()
-    {
+    void Start(){
         if (toActivate != null)
         {
             toActivate.gameObject.SetActive(false);
@@ -33,7 +34,7 @@ public class LetterManagerKey : MonoBehaviour
     private void OnTriggerExit(Collider other){
         if(other.gameObject.tag == "Player"){
             Debug.Log("Player left the trigger");
-            toActivate.gameObject.SetActive(false);
+            m_ClueKey.SetActive(false);
         }
     }
 
@@ -53,7 +54,6 @@ public class LetterManagerKey : MonoBehaviour
         {
             Debug.Log("Clue Three found");
             m_ClueKeyFound = true;
-            m_ClueKey.SetActive(false);
             toActivate.gameObject.SetActive(true);
             Debug.Log("Button activated");
         }

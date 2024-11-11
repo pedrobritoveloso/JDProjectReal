@@ -12,10 +12,13 @@ public class LetterManagerDoor : MonoBehaviour
 
     public LetterManagerBed m_LetterManagerBed;
 
+    public GameObject Letter1;
+
     private bool m_ClueDoorFound = false; //porta
 
     void Start()
     {
+        Letter1.SetActive(false);
         if( toActivate != null){
             toActivate.gameObject.SetActive(false);
         }
@@ -38,6 +41,7 @@ public class LetterManagerDoor : MonoBehaviour
             Debug.Log("Clue One found");
             m_ClueDoorFound = true;
             toActivate.gameObject.SetActive(true);
+            Letter1.SetActive(true);
             Debug.Log("Button activated");
             m_LetterManagerBed.Active();
         }
@@ -47,6 +51,7 @@ public class LetterManagerDoor : MonoBehaviour
         if(other.gameObject.tag == "Player"){
             Debug.Log("Player left the trigger");
             m_ClueOne.SetActive(false);
+            Letter1.SetActive(false);
         }
     }
 

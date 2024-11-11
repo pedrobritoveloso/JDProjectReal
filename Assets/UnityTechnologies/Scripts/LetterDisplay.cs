@@ -68,14 +68,4 @@ public class LetterManager : MonoBehaviour
             }
         }
     }
-
-    // Optional close method if you want a separate close button
-    public void CloseLetter()
-    {
-        if (currentLetterIndex != -1)
-        {
-            letterImages[currentLetterIndex].SetActive(false);
-            currentLetterIndex = -1;
-        }
-    }
 }

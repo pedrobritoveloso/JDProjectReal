@@ -10,11 +10,13 @@ public class LetterManagerBed : MonoBehaviour
     public Button toActivate;
     public LetterManagerDoor m_LetterManagerDoor; 
     public LetterManagerBath m_LetterManagerBath;
+    public GameObject Letter2;
 
     private bool m_ClueBedFound = false; //porta
     
     void Start()
     {
+        Letter2.SetActive(false);
         if( toActivate != null){
             toActivate.gameObject.SetActive(false);
         }
@@ -53,6 +55,7 @@ public class LetterManagerBed : MonoBehaviour
             Debug.Log("Clue Two found");
             m_ClueBedFound = true;
             toActivate.gameObject.SetActive(true);
+            Letter2.SetActive(true);
             Debug.Log("Button activated");
             m_LetterManagerBath.Active();
         }
@@ -61,6 +64,7 @@ public class LetterManagerBed : MonoBehaviour
         if(other.gameObject.tag == "Player"){
             Debug.Log("Player left the trigger");
             m_ClueTwo.SetActive(false);
+            Letter2.SetActive(false);
         }
     }
 

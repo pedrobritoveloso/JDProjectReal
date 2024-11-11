@@ -12,6 +12,8 @@ public class LetterManagerKey : MonoBehaviour
     public Button toActivate;
     public LetterManagerBath m_LetterManagerBath;
 
+    public GameObject Letter4;
+
     private bool m_ClueKeyFound = false; //porta
 
     void Start(){
@@ -35,6 +37,7 @@ public class LetterManagerKey : MonoBehaviour
         if(other.gameObject.tag == "Player"){
             Debug.Log("Player left the trigger");
             m_ClueKey.SetActive(false);
+            Letter4.SetActive(false);
         }
     }
 
